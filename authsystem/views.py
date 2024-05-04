@@ -3,17 +3,20 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from.models import permissionmanager
-from .decorators import teachercheck
+from .decorators import teachercheck,unauthenticated_user,authenticated_user
 from django.http import HttpResponse
 
-
-
+from userprofile.models import userprofile
 
 
 def index(request):
-    return render(request, 'authsystem/index.html')
+    if request.user.is_authenticated:
+        fname = request.user.first_name
+        return render(request, 'authsystem/index.html',{'fname':fname})
+    else:
+        return render(request, 'authsystem/index.html')
 
-
+@authenticated_user
 def signup(request):
     if request.method == 'POST':
         username= request.POST['username']
@@ -47,12 +50,16 @@ def signup(request):
         userperms=permissionmanager(user=myuser)
         userperms.save()
         
-
+        userprofileinfo = userprofile(user=myuser)
+        userprofileinfo.save()
+        
+        
+        
         messages.success(request, "Your account has been successfully created")
         return redirect('signin')
     return render(request, 'authsystem/signup.html')
 
-
+@authenticated_user
 def signin(request):
     if request.method=="POST":
         username = request.POST['username']
