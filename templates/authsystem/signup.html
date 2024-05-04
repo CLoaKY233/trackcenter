@@ -90,30 +90,30 @@
 <form action="/signup" method="post" class="container">
     {% csrf_token %}
     <div class="form-group">
-        <label for="username">User Name</label>
-        <input type="text" class="form-control" id="username" name="username" placeholder="Please enter your username here!" required>
+        <label for="username">Registration Number</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="eg. 22BCE10475" required>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="firstname">First Name</label>
-            <input type="text" class="form-control" id="firstname" name="fname" placeholder="Please enter your firstname here!" required>
+            <input type="text" class="form-control" id="firstname" name="fname" placeholder="First Name" required>
         </div>
         <div class="form-group col-md-6">
             <label for="lastname">Last Name</label>
-            <input type="text" class="form-control" id="lastname" name="lname" placeholder="Please enter your lastname here!" required>
+            <input type="text" class="form-control" id="lastname" name="lname" placeholder="Last Name" required>
         </div>
     </div>
     <div class="form-group">
         <label for="email">Email Id</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Please enter your email here!" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="eg. laysheth1@gmail.com" required>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Please enter your password here!" required>
+        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="password" required>
     </div>
     <div class="form-group">
         <label for="confirm_password">Confirm Password</label>
-        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm your password" required>
+        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Confirm password" required>
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Sign Up</button>
