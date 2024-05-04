@@ -11,5 +11,6 @@ def teachercheck(view_func):
             return view_func(request ,*args,**kwargs)
         else :
             return redirect("homepage")
-    
     return wrapper_func
+
+

@@ -71,9 +71,13 @@ def signin(request):
     return render(request, 'authsystem/signin.html')
 
 
-@teachercheck
-def markupdater(request):
-    return HttpResponse("yay")
+
+
+
+
+
+
+
 
 
 def signout(request):

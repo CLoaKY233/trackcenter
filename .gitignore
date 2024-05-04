@@ -1,3 +1,4 @@
 myenv/
 db.sqlite3
 authsystem/migrations
+userprofile/migrations
