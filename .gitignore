@@ -1,4 +1,8 @@
 myenv/
 db.sqlite3
 authsystem/migrations
+authsystem/__pycache__
 userprofile/migrations
+userprofile/__pycache__
+trackcenter/migrations
+trackcenter/__pycache__
