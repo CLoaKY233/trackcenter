@@ -86,26 +86,26 @@
 <form action="/profile/editprofile" method="post" class="container">
     {% csrf_token %}
     <div class="form-group">
-        <label for="github_id">github id</label>
-        <input type="text" class="form-control" id="github_id" name="github_id" placeholder="github id" >
+        <label for="github_id">Github id</label>
+        <input type="text" class="form-control" id="github_id" name="github_id" placeholder="Github id" >
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="project_name">Project Name</label>
-            <input type="text" class="form-control" id="project_name" name="project_name" placeholder="project name" >
+            <input type="text" class="form-control" id="project_name" name="project_name" placeholder="Project Name" >
         </div>
         <div class="form-group col-md-6">
             <label for="project_about">Project Description!</label>
-            <input type="text" class="form-control" id="project_about" name="project_about" placeholder="about this project" >
+            <input type="text" class="form-control" id="project_about" name="project_about" placeholder="About this project" >
         </div>
     </div>
     <div class="form-group">
         <label for="project_link">Project github link</label>
-        <input type="text" class="form-control" id="project_link" name="project_link" placeholder="project link" >
+        <input type="text" class="form-control" id="project_link" name="project_link" placeholder="Project Link" >
     </div>
     <div class="form-group">
         <label for="email">Email Id</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Please enter your email here!" >
+        <input type="email" class="form-control" id="email" name="email" placeholder="eg. laysheth1@gmail.com" >
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Update</button>

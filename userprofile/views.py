@@ -22,6 +22,7 @@ def profile(request):
         'email_address': user.email,
 
     }
+    
 
     # Pass the dictionary data as context to the template
     return render(request, 'userprofile/profile.html', {'user_profile': user_profile})
@@ -39,7 +40,7 @@ def editprofile(request):
             email = request.POST['email']
             if User.objects.filter(email=email):
                 messages.error(request, "Email already registered, please retry with another email")
-                return redirect('editprofile')  
+                return render(request,'userprofile/editprofile.html',{'messages': messages.get_messages(request)})  
             user.email = email
             
             
@@ -48,19 +49,10 @@ def editprofile(request):
         else:# If it is, set the email to the current email
             githubid = request.POST['github_id']
             if userprofile.objects.filter(user_githubid=githubid):
-                messages.error(request, "github link already registered, please recheck")
-                return redirect('editprofile')  
+                messages.warning(request, "github link already registered, please recheck")
+                return render(request,'userprofile/editprofile.html',{'messages': messages.get_messages(request)})  
             info.user_githubid = githubid
-            
-            
-        # githubid = request.POST['github_id'] if request.POST['github_id'] else info.user_githubid
-        # if userprofile.objects.filter(user_githubid=githubid):
-        #     messages.error(request, "that link is already added, please change it or leave it blank!")
-        #     return redirect('editprofile')  
-        # info.user_githubid = githubid
-        
-        
-        
+
         
         info.project_name = request.POST['project_name'] if request.POST['project_name'] else info.project_name
         info.project_link = request.POST['project_link'] if request.POST['project_link'] else info.project_link
@@ -71,6 +63,6 @@ def editprofile(request):
         return redirect('profile')
         # Add a success message
     else:
-        messages.error(request, 'Invalid request method')  # Add an error message for GET requests
+        messages.success(request, 'Hello there!, profile changes here will reflect immidietly! Please proceed with caution')  # Add an error message for GET requests
     
     return render(request, 'userprofile/editprofile.html', {'messages': messages.get_messages(request)})
