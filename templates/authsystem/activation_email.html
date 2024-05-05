@@ -1,0 +1,27 @@
+
+{% comment %} "http://{{ domain }}/activate/{{ activation_key }}/" {% endcomment %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Activation</title>
+</head>
+<body>
+    <h2>Activate Your Account</h2>
+    <p>Hello {{ user.username }},</p>
+    <p>
+        Thank you for signing up! To activate your account, please click the link below:
+    </p>
+    <p>
+        <a href="http://{{ domain }}/activate/{{ activation_key }}/">Activate Now</a>
+    </p>
+    <p>If you didn't sign up for this account, you can safely ignore this email.</p>
+    <p>Best regards,</p>
+    <p>Your Website Team</p>
+</body>
+</html>
+

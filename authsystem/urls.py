@@ -8,7 +8,7 @@ urlpatterns = [
     #path('signup/', RedirectView.as_view(url='/signup')),
     path('signin', views.signin, name='signin'),
     path('signout', views.signout, name='signout'),
-    
+    path('activate/<str:activation_key>/', views.activate_account, name='activate_account'),
     
     
 

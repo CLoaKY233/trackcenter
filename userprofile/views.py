@@ -6,7 +6,6 @@ from django.contrib import messages
 # Create your views here.
 
 
-
 @unauthenticated_user
 def profile(request):
     user = request.user
