@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('authsystem.urls')),
     path('profile',include('userprofile.urls')),
+    path('grade',include('reviewer.urls'))
 ]
 

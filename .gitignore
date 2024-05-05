@@ -6,3 +6,5 @@ userprofile/migrations
 userprofile/__pycache__
 trackcenter/migrations
 trackcenter/__pycache__
+reviewer/migrations
+reviewer/__pycache__
