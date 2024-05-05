@@ -19,10 +19,11 @@ def tableview(request):
     return render(request, 'reviewer/tableview.html', {'users': users})
 
 def search(request):
-    if request.method == 'GET':
-        search = request.GET['query']
-        users = User.objects.filter(permissionmanager__is_active=True,permissionmanager__is_student=True,permissionmanager__is_teacher=False,userprofile__user_regno__icontains=search)
-        return render(request, 'reviewer/tableview.html', {'users': users})
+    if request.method == 'POST':
+        search = request.POST.get('query')
+        users = User.objects.filter(permissionmanager__is_active=True, permissionmanager__is_student=True, permissionmanager__is_teacher=False, userprofile__user_regno__icontains=search)
+        messages.success(request, f'Search results for {search}')
+        return render(request, 'reviewer/tableview.html', {'users': users, 'messages': messages.get_messages(request)})
     return HttpResponse("hehe")
 
 #decorator for teachers only!
