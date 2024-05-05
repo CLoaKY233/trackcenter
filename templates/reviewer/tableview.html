@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
@@ -66,8 +67,8 @@
             </ul>
         </div> 
 
-    
-    
+{% comment %} <div class="border border-black">
+<div class="container-md">
   <table class="table table-hover">
   <thead>
     <tr>
@@ -94,12 +95,69 @@
       {% endfor %}
   </tbody>
 </table>
+</div>
+</div>
+     {% endcomment %}
 
-    
+<br>
 
 
 
+<div class="container-md">
+<div class="accordion" id="accordionExample">
+  {% for user in users %}
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapse{{forloop.counter}}">
+        {{user.userprofile.user_regno}}
+      </button>
+    </h2>
+    <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="card border-info mb-3">
+        <div class="card-header">
+            {{user.first_name}} {{user.last_name}}
+          </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ user.userprofile.project_name }}</h5>
+                <p class="card-text">Project Description: {{ user.userprofile.project_about }}</p>
 
+
+
+                {% if user.userprofile.user_githubid != "NOT PROVIDED" %}
+                    {% if "https://" not in user.userprofile.user_githubid %}
+                        <a href="https://{{ user.userprofile.user_githubid }}" class="btn btn-primary" target="_blank">View student on GitHub</a>
+                    {% else %}
+                        <a href="{{ user.userprofile.user_githubid }}" class="btn btn-primary" target="_blank">View student on GitHub</a>
+                    {% endif %}
+                {% else %}
+                    <a href="#" class="btn btn-primary">Link not provided</a>
+                {% endif %}
+
+
+                {% if user.userprofile.project_link != "NOT PROVIDED" %}
+                    {% if "https://" not in user.userprofile.project_link %}
+                        <a href="https://{{ user.userprofile.project_link }}" class="btn btn-primary" target="_blank">View project on GitHub</a>
+                    {% else %}
+                        <a href="{{ user.userprofile.project_link }}" class="btn btn-primary" target="_blank">View project on GitHub</a>
+                    {% endif %}
+                {% else %}
+                    <a href="#" class="btn btn-primary">Link not provided</a>
+                {% endif %}
+
+
+                
+                 <a href="#" class="btn btn-outline-danger" target="_blank">Grade Student</a>
+                
+
+            </div>
+        </div>        
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
 
 
 
