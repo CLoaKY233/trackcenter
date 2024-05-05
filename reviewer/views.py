@@ -5,18 +5,21 @@ from authsystem.models import permissionmanager
 from django.contrib import messages
 from userprofile.models import userprofile
 from .models import projectgrade
+from authsystem.decorators import *
 
 
 
 # Create your views here.
 
-
-
-#decorator for teachers only!
+@verified_user
+@teachercheck
 def tableview(request):
     users = User.objects.filter(permissionmanager__is_active=True,permissionmanager__is_student=True,permissionmanager__is_teacher=False)
     return render(request, 'reviewer/tableview.html', {'users': users})
 
+
+@verified_user
+@teachercheck
 def search(request):
     if request.method == 'POST':
         search = request.POST.get('query')
@@ -26,7 +29,10 @@ def search(request):
     messages.warning(request, 'An error occoured!')
     return redirect("tableview")
 
-#decorator for teachers only!
+
+
+@verified_user
+@teachercheck
 def gradeview(request):
     if request.method == 'POST':
         regno= request.POST.get('student')
@@ -58,6 +64,3 @@ def gradeview(request):
         return redirect('tableview')
     return render(request, 'reviewer/tableview.html',{'messages':messages.get_messages(request)})
 
-#decorator for students only!
-def remarksview(request):
-    pass

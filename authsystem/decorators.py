@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
 from .models import permissionmanager
+from django.contrib import messages
 
 
 
@@ -10,6 +11,7 @@ def teachercheck(view_func):
         if userperms.is_teacher:
             return view_func(request ,*args,**kwargs)
         else :
+            messages.error(request, "You are not a teacher, you cannot access this page")
             return redirect("homepage")
     return wrapper_func
 
