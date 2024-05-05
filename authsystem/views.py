@@ -40,17 +40,35 @@ def signup(request):
         
         
         if User.objects.filter(username=username):
-            messages.error(request, "Username already exists, please chose another one")
+            messages.warning(request, "Username already exists, please chose another one")
+            return redirect('signup')
+        
+        
+        
         if User.objects.filter(email=email):
-            messages.error(request, "Email already registered, please login!")
-            return redirect('signin')
+            user=User.objects.get(email=email)
+            userperms=permissionmanager.objects.get(user=user)
+            if userperms.is_active==True:
+                messages.warning(request, "Email already registered!, please sign in")
+                return redirect('signin')
+            elif userperms.is_active==False:
+                messages.warning(request, "Similar Email was found, please activate your account asap")
+                
+
+        
+        
+        
+        
+        # if User.objects.filter(email=email):
+        #     messages.warning(request, "Email already registered, please login!")
+        #     return redirect('signin')
         if len(username) > 12:
-            messages.error(request, "Username must be under 12 characters")
+            messages.warning(request, "Username must be under 12 characters")
         if not username.isalnum():
-            messages.error(request, "Username must be alphanumeric")
+            messages.warning(request, "Username must be alphanumeric")
             return redirect('signup')
         if pass1 != pass2:
-            messages.error(request, "Passwords do not match")
+            messages.warning(request, "Passwords do not match")
             return redirect('signup')
 
     
@@ -132,7 +150,7 @@ def signin(request):
             messages.success(request, "Successfully logged in")
             return render(request,'authsystem/index.html',{'fname':fname})
         else:
-            messages.error(request, "Invalid credentials, please try again")
+            messages.warning(request, "Invalid credentials, please try again")
             return redirect('signin')
     return render(request, 'authsystem/signin.html')
 
@@ -182,7 +200,7 @@ def activate_account(request, activation_key):
                     break
             else:
                 # User email does not exist in the sheet
-                messages.error(request, "You are not allowed to activate this account. Please contact the admin.")
+                messages.warning(request, "You are not allowed to activate this account. Please contact the admin.")
                 return redirect('homepage')
             
             
@@ -208,8 +226,8 @@ def activate_account(request, activation_key):
             messages.success(request, "Your account has been activated")
             redirect('homepage')
         else:
-            messages.error(request, "Invalid activation key")
+            messages.warning(request, "Invalid activation key")
 
     except (TypeError, ValueError, OverflowError, User.DoesNotExist, permissionmanager.DoesNotExist) as e:
-        messages.error(request, f"Failed to activate your account: {e}")
+        messages.warning(request, f"Failed to activate your account: {e}")
     return redirect('homepage')
