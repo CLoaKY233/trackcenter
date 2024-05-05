@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import userprofile
 from authsystem.decorators import *
 from django.contrib import messages
+from reviewer.models import projectgrade
 # Create your views here.
 
 
@@ -10,6 +11,7 @@ from django.contrib import messages
 def profile(request):
     user = request.user
     info = userprofile.objects.get(user=user)
+    usergrade=projectgrade.objects.get(user=user)
     user_profile = {
         'username': user.username,
         'regno':info.user_regno,
@@ -20,7 +22,9 @@ def profile(request):
         'project_link': info.project_link,
         'project_about': info.project_about,
         'email_address': user.email,
-
+        'grade': usergrade.grade,
+        'remarks': usergrade.remarks,
+        'is_graded': usergrade.is_graded
     }
     
 
