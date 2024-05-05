@@ -85,7 +85,11 @@
       <td>{{user.userprofile.user_regno}}</td>
       <td>{{user.first_name}} {{user.last_name}}</td>
       <td>{{user.userprofile.project_name}}</td>
+      {% if user.userprofile.project_link != "NOT PROVIDED" %}
+      <td><a href={{user.userprofile.project_link}}>{{user.userprofile.project_link}}</a></td>
+      {% else %}
       <td>{{user.userprofile.project_link}}</td>
+      {% endif %}
     </tr>
       {% endfor %}
   </tbody>

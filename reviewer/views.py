@@ -24,7 +24,8 @@ def search(request):
         users = User.objects.filter(permissionmanager__is_active=True, permissionmanager__is_student=True, permissionmanager__is_teacher=False, userprofile__user_regno__icontains=search)
         messages.success(request, f'Search results for {search}')
         return render(request, 'reviewer/tableview.html', {'users': users, 'messages': messages.get_messages(request)})
-    return HttpResponse("hehe")
+    messages.warning(request, 'An error occoured!')
+    return redirect("tableview")
 
 #decorator for teachers only!
 def checker(request):
