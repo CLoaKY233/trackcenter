@@ -22,7 +22,12 @@
             <li class="nav-item">
             <a class="nav-link" href="https://www.linkedin.com/in/cloaky233/">LinkedIn</a>
       </form>
+      
         </ul>
+      <form action="/grade/search" method="get" class="d-flex ms-auto" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query" id="query">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
         </div>
     </div>
     </nav> 
@@ -37,21 +42,28 @@
 
 
 
-    <div>
+            <div>
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
                 </li>
-           
+
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="/signin">Sign In</a>
+                </li>
+
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/profile">profile</a>
-                </li>  
+                    <a class="nav-link" href="/signup">Sign Up</a>
+                </li>     {% endcomment %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">profile</a>
+                </li>        
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/grade">Grade</a>
+                </li>
             </ul>
         </div> 
-
-
-            
-
 
     
     

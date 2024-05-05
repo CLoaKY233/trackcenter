@@ -4,5 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    path('',views.tableview,name='tableview')
+    path('',views.tableview,name='tableview'),
+    path('/search',views.search,name='search'),
 ]

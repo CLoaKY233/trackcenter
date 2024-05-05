@@ -15,11 +15,15 @@ from userprofile.models import userprofile
 def tableview(request):
     
     
-    users = User.objects.filter(permissionmanager__is_active=True)
+    users = User.objects.filter(permissionmanager__is_active=True,permissionmanager__is_student=True,permissionmanager__is_teacher=False)
     return render(request, 'reviewer/tableview.html', {'users': users})
 
 def search(request):
-    pass
+    if request.method == 'GET':
+        search = request.GET['query']
+        users = User.objects.filter(permissionmanager__is_active=True,permissionmanager__is_student=True,permissionmanager__is_teacher=False,userprofile__user_regno__icontains=search)
+        return render(request, 'reviewer/tableview.html', {'users': users})
+    return HttpResponse("hehe")
 
 #decorator for teachers only!
 def checker(request):
