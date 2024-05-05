@@ -12,6 +12,7 @@ def profile(request):
     info = userprofile.objects.get(user=user)
     user_profile = {
         'username': user.username,
+        'regno':info.user_regno,
         'fname': user.first_name,
         'lname': user.last_name,
         'github_id': info.user_githubid,

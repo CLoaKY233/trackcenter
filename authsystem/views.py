@@ -15,6 +15,8 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.html import strip_tags
 
+import openpyxl
+
 
 
 
@@ -165,10 +167,44 @@ def activate_account(request, activation_key):
         user = request.user
         userperms = permissionmanager.objects.get(user=user)
         userkey = userperms.activation_key
-
+        userinfo = userprofile.objects.get(user=user)
         if activation_key == userkey:
-            userperms.is_active = True
+            
+            workbook=openpyxl.load_workbook('authsystem\data.xlsx')
+            sheet = workbook.active
+            
+                
+            for row in sheet.iter_rows(values_only=True):
+                if row[2] == user.email:
+                    # User email exists in the sheet
+                    regno = row[0]
+                    name = row[1]
+                    break
+            else:
+                # User email does not exist in the sheet
+                messages.error(request, "You are not allowed to activate this account. Please contact the admin.")
+                return redirect('homepage')
+            
+            
+            name = name.split()
+            user.first_name = name[0]
+            user.last_name=name[-1]
+            
+            userinfo.user_regno=regno
+            
+            userperms.is_active=True
+            # Send email notification to user
+            send_mail(
+                subject='Account Activated',
+                message=f'Your account has been activated.\n Registeration Number -> {regno}\nName : {name} \nEmail : {user.email}',
+                from_email='exhibitionease.auth@gmail.com',
+                recipient_list=[user.email],
+                fail_silently=True
+            )
+
             userperms.save()
+            userinfo.save()
+            user.save()
             messages.success(request, "Your account has been activated")
             redirect('homepage')
         else:

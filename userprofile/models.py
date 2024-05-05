@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class userprofile(models.Model):
+    class Meta:
+        managed = True
     user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user_regno=models.CharField(max_length=10,default="UNVERIFIED")
     user_githubid=models.CharField(max_length=70,default="NOT PROVIDED")
     project_name=models.CharField(max_length=25,default="NOT PROVIDED")
     project_about=models.CharField(max_length=300,default="NOT PROVIDED")
@@ -11,3 +14,5 @@ class userprofile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+    
