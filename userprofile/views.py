@@ -38,14 +38,14 @@ def editprofile(request):
         info = userprofile.objects.get(user=user)
         
         
-        if request.POST['email'] == '':  # Check if the email field is empty
-            user.email = user.email
-        else:# If it is, set the email to the current email
-            email = request.POST['email']
-            if User.objects.filter(email=email):
-                messages.error(request, "Email already registered, please retry with another email")
-                return render(request,'userprofile/editprofile.html',{'messages': messages.get_messages(request)})  
-            user.email = email
+        # if request.POST['email'] == '':  # Check if the email field is empty
+        #     user.email = user.email
+        # else:# If it is, set the email t   o the current email
+        #     email = request.POST['email']
+        #     if User.objects.filter(email=email):
+        #         messages.error(request, "Email already registered, please retry with another email")
+        #         return render(request,'userprofile/editprofile.html',{'messages': messages.get_messages(request)})  
+        #     user.email = email
             
             
         if request.POST['github_id'] == '':  # Check if the email field is empty

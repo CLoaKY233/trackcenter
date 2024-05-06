@@ -35,6 +35,7 @@ def search(request):
 @teachercheck
 def gradeview(request):
     if request.method == 'POST':
+        
         regno= request.POST.get('student')
         totalmarks = int(request.POST.get('marks'))
         remarks = request.POST.get('remarks')
