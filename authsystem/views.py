@@ -179,7 +179,7 @@ def signout(request):
 
 
 def activate_account(request, activation_key):
-    import django.utils.text
+
 
     if not request.user.is_authenticated:
         messages.warning(request, "You need to be logged in to activate your account")
