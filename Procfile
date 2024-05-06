@@ -1,1 +1,1 @@
-web: gunicorn trackcenter.wsgi
+web: gunicorn trackcenter.wsgi --log-file -
