@@ -192,7 +192,7 @@ def activate_account(request, activation_key):
         userinfo = userprofile.objects.get(user=user)
         if activation_key == userkey:
             
-            workbook=openpyxl.load_workbook('authsystem\studentdata.xlsx')
+            workbook=openpyxl.load_workbook('authsystem/studentdata.xlsx')
             sheet = workbook.active
             
                 
