@@ -96,7 +96,7 @@ def signup(request):
             message=f'Hello {firstname + lastname}\nYour account has been successfully created on Trackcenter\n',
             from_email='exhibitionease.auth@gmail.com',
             recipient_list=[f'{email}'],
-            fail_silently=False,  # Set to True if you don't want to raise exceptions
+            fail_silently=True,  # Set to True if you don't want to raise exceptions
         )        
         messages.success(request, "Your account has been successfully created")
         return redirect('signin')
