@@ -215,13 +215,13 @@ def activate_account(request, activation_key):
             #userinfo.user_regno=regno
             
             userperms.is_active=True
-            # Send email notification to user
+            # # Send email notification to user
             send_mail(
                 subject='Account Activated',
-                message=f'Your account has been activated.\n Registeration Number -> {regno}\nName : {name} \nEmail : {user.email}',
+                message=f'Your account has been activated.\n Registeration Number -> ',
                 from_email='exhibitionease.auth@gmail.com',
                 recipient_list=[user.email],
-                fail_silently=False
+                fail_silently=True
             )
 
 
